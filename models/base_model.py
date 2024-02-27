@@ -22,14 +22,15 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """String representation of the BaseModel class"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        """Function that returns official string rep of instances"""
+        return ("[{}] ({}) {}".format(type(self).__name__,
+                self.id, self.__dict__))
 
     def save(self):
-        """Updates the updated_at attribute with the current datetime"""
+        """Function to update public instance attribute with current date"""
         self.updated_at = datetime.now()
         models.storage.save()
-    
+
     def to_dict(self):
         """Returns a dictionary containing all keys/values of __dict__"""
         new_dict = self.__dict__.copy()
