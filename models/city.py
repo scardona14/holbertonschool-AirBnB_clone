@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module city"""
+"""Module class city"""
 from models.base_model import BaseModel
 
 
