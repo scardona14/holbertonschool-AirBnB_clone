@@ -17,7 +17,10 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    try:
+                        value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    except ValueError:
+                        pass
                 setattr(self, key, value)
 
         models.storage.new(self)
