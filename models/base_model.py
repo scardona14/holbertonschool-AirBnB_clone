@@ -6,7 +6,7 @@ import models
 
 
 class BaseModel:
-   class BaseModel:
+
     """Base class for AirBnB clone"""
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
@@ -17,15 +17,16 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                setattr(self, key, value)
+                    value = datetime.datetime.strptime(value,
+                                                       "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
 
         models.storage.new(self)
 
     def __str__(self):
         """Function that returns official string rep of instances"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
-                self.id, self.__dict__)
+                                     self.id, self.__dict__)
 
     def save(self):
         """Function to update public instance attribute with current date"""
