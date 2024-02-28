@@ -22,6 +22,7 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
+        """If kwargs is not empty, the instance is created from a dictionary"""
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -43,10 +44,11 @@ class BaseModel:
             models.storage.save()
 
         def to_dict(self):
-            """Returns a dictionary containing all keys/values of __dict__"""
-            nt = self.__dict__.copy()
-            nt["created_at"] = self.created_at.isoformat()
-            nt["updated_at"] = self.updated_at.isoformat()
-            nt["__class__"] = self.__class__.__name__
+            """Returns a dictionary containing all keys/values of __dict__
+            td: dictionary with all keys/values of __dict__"""
+            td = self.__dict__.copy()
+            td ["created_at"] = self.created_at.isoformat()
+            td ["updated_at"] = self.updated_at.isoformat()
+            td ["__class__"] = self.__class__.__name__
 
-            return nt
+            return td
