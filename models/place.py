@@ -1,20 +1,27 @@
 #!/usr/bin/python3
 """Module place"""
-from models.base_model import BaseModel
-from datetime import datetime
-import models
+
+import unittest
+from models.place import Place
 
 
-class Place(BaseModel):
-    """Place class"""
-    city_id = ""
-    user_id = ""
-    name = ""
-    description = ""
-    number_rooms = 0
-    number_bathrooms = 0
-    max_guest = 0
-    price_by_night = 0
-    latitude = 0.0
-    longitude = 0.0
-    amenity_ids = []
+class test_cplace(unittest.TestCase):
+    """tests place"""
+
+    def test_place(self):
+        pl = Place()
+        self.assertEqual(pl.name, '')
+        self.assertEqual(pl.city_id, '')
+        self.assertEqual(pl.user_id, '')
+        self.assertEqual(pl.description, '')
+        self.assertEqual(pl.number_rooms, 0)
+        self.assertEqual(pl.number_bathrooms, 0)
+        self.assertEqual(pl.max_guest, 0)
+        self.assertEqual(pl.price_by_night, 0)
+        self.assertEqual(pl.latitude, 0.0)
+        self.assertEqual(pl.longitude, 0.0)
+        self.assertEqual(pl.amenity_ids, [])
+
+
+if __name__ == '__main__':
+    unittest.main()

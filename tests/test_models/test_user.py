@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Testerino"""
+"""Test for user"""
 
 import unittest
 from models.user import User
@@ -13,5 +13,6 @@ class test_cuser(unittest.TestCase):
         self.assertEqual(u.last_name, "")
         self.assertEqual(u.password, "")
 
+
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()
