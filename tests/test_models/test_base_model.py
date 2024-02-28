@@ -28,7 +28,8 @@ class TestBaseModel(unittest.TestCase):
     def test_str(self):
         """Testing BaseMoodel __str__"""
         b1 = BaseModel()
-        self.assertEqual(str(b1), "[BaseModel] ({}) {}".format(b1.id, b1.__dict__))
+        self.assertEqual(str(b1), "[BaseModel] ({}) {}"
+                         .format(b1.id, b1.__dict__))
 
     def test_save(self):
         """Testing BaseMoodel save"""
@@ -55,6 +56,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(b1.created_at, b2.created_at)
         self.assertEqual(b1.updated_at, b2.updated_at)
         self.assertEqual(b1.id, b2.id)
+
 
 if __name__ == "__main__":
     unittest.main()
