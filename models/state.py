@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module state"""
+"""Module class state"""
 from models.base_model import BaseModel
 
 
