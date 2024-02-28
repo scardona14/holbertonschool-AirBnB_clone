@@ -10,5 +10,6 @@ class test_cstate(unittest.TestCase):
         st = State()
         self.assertEqual(st.name, "")
 
+
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()

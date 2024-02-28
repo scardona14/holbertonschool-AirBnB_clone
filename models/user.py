@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Module user"""
-from datetime import datetime
-from models import base_model
-import models
+
+"""creates class user"""
 
 
-class User(base_model.BaseModel):
-    """User class"""
+from models.base_model import BaseModel
+
+
+class User(BaseModel):
     email = ""
     password = ""
     first_name = ""

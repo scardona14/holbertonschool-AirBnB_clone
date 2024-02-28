@@ -22,5 +22,6 @@ class test_cplace(unittest.TestCase):
         self.assertEqual(pl.longitude, 0.0)
         self.assertEqual(pl.amenity_ids, [])
 
+
 if __name__ == '__main__':
     unittest.main()

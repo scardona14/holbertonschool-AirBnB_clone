@@ -11,7 +11,7 @@ from models import storage
 
 
 class test_filestorage(unittest.TestCase):
-    """Testerino"""
+    """Test for file_storage.py"""
     def test_file_exists(self):
         self.assertEqual(type(FileStorage._FileStorage__file_path), str)
 

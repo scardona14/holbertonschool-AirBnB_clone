@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Testerino"""
+"""Test for city"""
 
 import unittest
 from models.city import City
@@ -13,5 +13,6 @@ class test_ccity(unittest.TestCase):
         self.assertEqual(c1.state_id, "")
         self.assertEqual(c1.name, "")
 
+
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()

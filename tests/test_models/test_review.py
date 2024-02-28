@@ -13,5 +13,6 @@ class test_creview(unittest.TestCase):
         self.assertEqual(rv.user_id, "")
         self.assertEqual(rv.text, "")
 
+
 if __name__ == '__main__':
     unittest.main()
