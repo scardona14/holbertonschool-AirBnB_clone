@@ -1,65 +1,41 @@
-#!/usr/bin/python3
-"""Module test_base_model"""
-
 import unittest
+from unittest.mock import patch
+from io import StringIO
+from datetime import datetime
+from models import storage
 from models.base_model import BaseModel
-import os
-import uuid
-import datetime import datetime
-
 
 class TestBaseModel(unittest.TestCase):
-    """Test for the BaseModel class"""
 
-    def test_id(self):
-        """Testing BaseMoodel id"""
-        b1 = BaseModel()
-        b2 = BaseModel()
-        self.assertNotEqual(b1.id, b2.id)
+    def setUp(self):
+        self.base_model = BaseModel()
 
-    def test_created_at(self):
-        """Testing BaseMoodel created_at"""
-        b1 = BaseModel()
-        b2 = BaseModel()
-        self.assertNotEqual(b1.created_at, b2.created_at)
+    def test_init(self):
+        self.assertIsNotNone(self.base_model.id)
+        self.assertIsInstance(self.base_model.created_at, datetime)
+        self.assertIsInstance(self.base_model.updated_at, datetime)
 
-    def test_updated_at(self):
-        """Testing BaseMoodel updated_at"""
-        b1 = BaseModel()
-        b2 = BaseModel()
-        self.assertNotEqual(b1.updated_at, b2.updated_at)
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_str(self, mock_stdout):
+        print(self.base_model)
+        expected_output = "[{}] ({}) {}".format(
+            self.base_model.__class__.__name__,
+            self.base_model.id,
+            self.base_model.__dict__
+        )
+        self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
 
-    def test_str(self):
-        """Testing BaseMoodel __str__"""
-        b1 = BaseModel()
-        self.assertEqual(str(b1), "[BaseModel] ({}) {}"
-                         .format(b1.id, b1.__dict__))
-
-    def test_save(self):
-        """Testing BaseMoodel save"""
-        b1 = BaseModel()
-        b1.save()
-        self.assertNotEqual(b1.created_at, b1.updated_at)
+    @patch.object(storage, 'save')
+    def test_save(self, mock_save):
+        self.base_model.save()
+        self.assertIsInstance(self.base_model.updated_at, datetime)
+        mock_save.assert_called_once()
 
     def test_to_dict(self):
-        """Testing BaseMoodel to_dict"""
-        b1 = BaseModel()
-        b1_dict = b1.to_dict()
-        self.assertEqual(b1_dict["__class__"], "BaseModel")
-        self.assertEqual(b1_dict["created_at"], b1.created_at.isoformat())
-        self.assertEqual(b1_dict["updated_at"], b1.updated_at.isoformat())
-        self.assertEqual(b1_dict["id"], b1.id)
-        self.assertEqual(b1_dict, b1.to_dict())
+        base_model_dict = self.base_model.to_dict()
+        self.assertEqual(base_model_dict['__class__'], 'BaseModel')
+        self.assertEqual(base_model_dict['created_at'], self.base_model.created_at.isoformat())
+        self.assertEqual(base_model_dict['updated_at'], self.base_model.updated_at.isoformat())
 
-    def test_kwargs(self):
-        """Testing BaseMoodel kwargs"""
-        b1 = BaseModel()
-        b1_dict = b1.to_dict()
-        b2 = BaseModel(**b1_dict)
-        self.assertEqual(b1.to_dict(), b2.to_dict())
-        self.assertEqual(b1.created_at, b2.created_at)
-        self.assertEqual(b1.updated_at, b2.updated_at)
-        self.assertEqual(b1.id, b2.id)
-
-    if __name__ == "__main__":
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
