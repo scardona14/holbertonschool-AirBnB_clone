@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module contains the BaseModel class for the AirBnB clone"""
 import uuid
-import datetime
+from datetime import datetime
 import models
 
 
@@ -11,13 +11,13 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    value = datetime.datetime.strptime(value,
+                    value = datetime.strptime(value,
                                                        "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
 
@@ -30,7 +30,7 @@ class BaseModel:
 
     def save(self):
         """Function to update public instance attribute with current date"""
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
