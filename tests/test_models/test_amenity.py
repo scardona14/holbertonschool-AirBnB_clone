@@ -34,7 +34,7 @@ class TestAmenity(unittest.TestCase):
     def test_str(self):
         """Testing Amenity __str__"""
         expected = "[Amenity] ({}) {}"
-        .format(self.amenity.id, self.amenity.__dict__)
+        expected = expected.format(self.amenity.id, self.amenity.__dict__)
 
         self.assertEqual(expected, str(self.amenity))
 
