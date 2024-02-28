@@ -43,3 +43,9 @@ class FileStorage():
             pass
         except Exception as e:
             raise e
+
+    def delete(self, obj=None):
+        """delete obj from __objects"""
+        if obj is not None:
+            key = obj.__class__.__name__ + "." + obj.id
+            del FileStorage.__objects[key]
