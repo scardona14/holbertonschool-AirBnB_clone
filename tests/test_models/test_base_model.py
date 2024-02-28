@@ -1,48 +1,62 @@
 #!/usr/bin/python3
-"""Test for BaseModel.py"""
-
-from time import sleep
+"""Module test_base_model"""
 import unittest
-from unittest import mock
-from unittest.mock import patch
 from models.base_model import BaseModel
-from datetime import datetime
-import os
 
 
-class test_BaseModel(unittest.TestCase):
-    """Unittest for BaseModel"""
+class TestBaseModel(unittest.TestCase):
+    """Test for the BaseModel class"""
 
     def test_id(self):
+        """Testing BaseMoodel id"""
         b1 = BaseModel()
-        self.assertIsNotNone(b1.id)
+        b2 = BaseModel()
+        self.assertNotEqual(b1.id, b2.id)
 
     def test_created_at(self):
+        """Testing BaseMoodel created_at"""
+        b1 = BaseModel()
         b2 = BaseModel()
-        b2.my_number = 89
-        self.assertEqual(b2.my_number, 89)
+        self.assertNotEqual(b1.created_at, b2.created_at)
 
-    def test_to_dict(self):
-        b3 = BaseModel()
-        v = b3.to_dict()
-        self.assertEqual(type(v), type({}))
-        self.assertIsNotNone(v['id'])
-
-    def test_update_time(self):
-        b4 = BaseModel()
-        try:
-            os.remove("file.json")
-        except Exception:
-            pass
-        b4.save()
-        self.assertTrue(os.path.exists("file.json"))
+    def test_updated_at(self):
+        """Testing BaseMoodel updated_at"""
+        b1 = BaseModel()
+        b2 = BaseModel()
+        self.assertNotEqual(b1.updated_at, b2.updated_at)
 
     def test_str(self):
-        b5 = BaseModel()
-        f = f"[{b5.__class__.__name__}] ({b5.id}) {b5.__dict__}"
-        p = b5.__str__()
-        self.assertEqual(p, f)
+        """Testing BaseMoodel __str__"""
+        b1 = BaseModel()
+        self.assertEqual(str(b1), "[BaseModel] ({}) {}"
+                         .format(b1.id, b1.__dict__))
+
+    def test_save(self):
+        """Testing BaseMoodel save"""
+        b1 = BaseModel()
+        b1.save()
+        self.assertNotEqual(b1.created_at, b1.updated_at)
+
+    def test_to_dict(self):
+        """Testing BaseMoodel to_dict"""
+        b1 = BaseModel()
+        b1_dict = b1.to_dict()
+        self.assertEqual(b1_dict["__class__"], "BaseModel")
+        self.assertEqual(b1_dict["created_at"], b1.created_at.isoformat())
+        self.assertEqual(b1_dict["updated_at"], b1.updated_at.isoformat())
+        self.assertEqual(b1_dict["id"], b1.id)
+        self.assertEqual(b1_dict, b1.to_dict())
+
+    def test_kwargs(self):
+        """Testing BaseMoodel kwargs"""
+        b1 = BaseModel()
+        b1_dict = b1.to_dict()
+        b2 = BaseModel(**b1_dict)
+        self.assertEqual(b1.to_dict(), b2.to_dict())
+        self.assertEqual(b1.created_at, b2.created_at)
+        self.assertEqual(b1.updated_at, b2.updated_at)
+        self.assertEqual(b1.id, b2.id)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

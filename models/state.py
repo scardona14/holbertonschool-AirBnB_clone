@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-
-"""creates class state"""
-
-
+"""Module state"""
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
+    """State class"""
     name = ""

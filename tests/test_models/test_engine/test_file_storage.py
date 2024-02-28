@@ -1,37 +1,42 @@
 #!/usr/bin/python3
-"""Test for file_storage.py"""
-
-from mmap import PAGESIZE
 import unittest
-import models
+from models.engine.file_storage import FileStorage
 import json
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
-from models import storage
 
 
-class test_filestorage(unittest.TestCase):
-    """Test for file_storage.py"""
-    def test_file_exists(self):
-        self.assertEqual(type(FileStorage._FileStorage__file_path), str)
+class TestFileStorage(unittest.TestCase):
+    """Test for the FileStorage class"""
 
-    def test_obj(self):
-        self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+    def setUp(self):
+        """Set up"""
+        self.storage = FileStorage()
 
-    def test_All(self):
-        a = storage.all()
-        self.assertEqual(type(a), dict)
+    def test_all(self):
+        """Test all"""
+        fs1 = FileStorage()
+        fs2 = FileStorage()
+        self.assertEqual(fs1.all(), fs2.all())
 
-    def test_reload(self):
-        re = FileStorage()
-        re.all().clear()
-        re.reload()
-        self.assertTrue(len(re.all()) > 0)
+    def test_new(self):
+        """Test new"""
+        fs1 = FileStorage()
+        bm1 = BaseModel()
+        fs1.new(bm1)
+        self.assertEqual(fs1.all(), {f'BaseModel.{bm1.id}': bm1})
 
-    def new(self):
-        a = storage.all()
-        storage.new(BaseModel)
-        self.assertNotEqual(a, storage.all())
 
-    def save(self):
-        pass
+    def test_save(self):
+        """Test save"""
+        fs1 = FileStorage()
+        bm1 = BaseModel()
+        fs1.new(bm1)
+        fs1.save()
+        with open("file.json", "r") as f:
+            data = json.load(f)
+            self.assertEqual(len(data), 2)
+            self.assertIn(f'BaseModel.{bm1.id}', data)
+
+
+if __name__ == "__main__":
+    unittest.main()

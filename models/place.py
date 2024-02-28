@@ -1,27 +1,42 @@
 #!/usr/bin/python3
 """Module place"""
-
-import unittest
-from models.place import Place
-
-
-class test_cplace(unittest.TestCase):
-    """tests place"""
-
-    def test_place(self):
-        pl = Place()
-        self.assertEqual(pl.name, '')
-        self.assertEqual(pl.city_id, '')
-        self.assertEqual(pl.user_id, '')
-        self.assertEqual(pl.description, '')
-        self.assertEqual(pl.number_rooms, 0)
-        self.assertEqual(pl.number_bathrooms, 0)
-        self.assertEqual(pl.max_guest, 0)
-        self.assertEqual(pl.price_by_night, 0)
-        self.assertEqual(pl.latitude, 0.0)
-        self.assertEqual(pl.longitude, 0.0)
-        self.assertEqual(pl.amenity_ids, [])
+from models.base_model import BaseModel
+from datetime import datetime
+import models
 
 
-if __name__ == '__main__':
-    unittest.main()
+class Place(BaseModel):
+    """Place class"""
+    city_id = ""
+    user_id = ""
+    name = ""
+    description = ""
+    number_rooms = 0
+    number_bathrooms = 0
+    max_guest = 0
+    price_by_night = 0
+    latitude = 0.0
+    longitude = 0.0
+    amenity_ids = []
+
+    def __init__(self, *args, **kwargs):
+        """Init"""
+        super().__init__(*args, **kwargs)
+        models.storage.new(self)
+
+    def __str__(self):
+        """Str"""
+        return "[Place] ({}) {}".format(self.id, self.__dict__)
+
+    def save(self):
+        """Save"""
+        self.updated_at = datetime.now()
+        models.storage.save()
+
+    def to_dict(self):
+        """To dict"""
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        return new_dict
