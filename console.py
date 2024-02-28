@@ -88,6 +88,21 @@ class HBNBCommand(cmd.Cmd):
         else:
             print([str(value) for key, value in storage.all().items()
                    if args[0] in key])
+    
+    def do_count(self, arg):
+        """Counts the number of instances of a class"""
+        args = arg.split()
+        count = 0
+        if not arg:
+            print("** class name missing **")
+        elif args[0] not in ["BaseModel", "User", "State", "City", "Place",
+                             "Amenity", "Review"]:
+            print("** class doesn't exist **")
+        else:
+            for key in storage.all():
+                if args[0] in key:
+                    count += 1
+            print(count)
             
     def do_update(self, arg):
         """Updates an instance based on the class name and id
