@@ -5,6 +5,7 @@ from datetime import datetime
 import models
 format_ = "%Y-%m-%dT%H:%M:%S.%f"
 
+
 class BaseModel:
 
     """Base class for AirBnB clone
@@ -13,7 +14,7 @@ class BaseModel:
     updated_at: datetime of the last update
     save(self): updates updated_at with the current datetime
     to_dict(self): returns a dictionary containing all keys/values of __dict__
-    __str__: should print: [{lass name}] ({self.id}) {self.__dict__}
+    __str__: should print:[{lass name}] ({self.id}) {self.__dict__}
     """
 
     def __init__(self, *args, **kwargs):
@@ -47,8 +48,8 @@ class BaseModel:
             """Returns a dictionary containing all keys/values of __dict__
             td: dictionary with all keys/values of __dict__"""
             td = self.__dict__.copy()
-            td ["created_at"] = self.created_at.isoformat()
-            td ["updated_at"] = self.updated_at.isoformat()
-            td ["__class__"] = self.__class__.__name__
+            td["created_at"] = self.created_at.isoformat()
+            td["updated_at"] = self.updated_at.isoformat()
+            td["__class__"] = self.__class__.__name__
 
             return td
