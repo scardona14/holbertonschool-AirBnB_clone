@@ -5,5 +5,5 @@ footer {
     position: fixed;
     display: flex;
     align-items: center;
-    bottom: 0;
+    justify-content: center;
 }
