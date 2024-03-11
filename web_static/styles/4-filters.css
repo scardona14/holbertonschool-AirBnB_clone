@@ -1,14 +1,14 @@
 .filters {
     color: white;
     height: 70px;
-    width: 70px;
+    width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap; 
 }
-.search button {
+.search-button {
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -20,5 +20,5 @@
     margin-right: 3%;
 }
 .search button:hover {
-    opacity: 0.9;
+    opacity: 90%;
 }
