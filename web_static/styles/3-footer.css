@@ -8,3 +8,7 @@ footer {
     align-items: center;
     justify-content: center;
 }
+p {
+    text-align: center;
+    line-height: 30px;
+}
