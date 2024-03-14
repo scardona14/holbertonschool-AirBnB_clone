@@ -36,7 +36,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.user1.password, "")
         self.assertEqual(self.user1.first_name, "")
         self.assertEqual(self.user1.last_name, "")
-    
+
     def test_created_at(self):
         """Testing created_at"""
         self.assertNotEqual(self.user1.created_at, self.user2.created_at)

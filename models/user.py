@@ -20,12 +20,12 @@ class User(base_model.BaseModel):
     def __str__(self):
         """String method"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
-    
+
     def save(self):
         """Save method"""
         self.updated_at = datetime.now()
         models.storage.save()
-    
+
     def to_dict(self):
         """To dictionary method"""
         new_dict = self.__dict__.copy()
