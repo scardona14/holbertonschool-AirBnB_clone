@@ -1,5 +1,6 @@
 /* Styles for the header */
 header {
+    background-image: url("../images/logo.png");
     background-color: white;
     height: 70px;
     width: 100%;
@@ -8,7 +9,6 @@ header {
     align-items: center;
     justify-content: flex-start;
     padding-left: 20px;
-    background-image: url('../images/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 20px center;
